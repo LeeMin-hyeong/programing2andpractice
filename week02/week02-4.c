@@ -1,19 +1,16 @@
 #include <stdio.h>
+#include <string.h>
 
-int main(void){
+int my_strlen(char str[]){
+    int n=0;
+    while(!str[n]=='\0'){
+        n++;        
+    }
+    return n;
+}
 
-double d=3.1;
-
-double *dp;
-
-dp=&d;
-
- 
-
-printf("%ld\n", sizeof(*dp));
-
-printf("%ld\n", sizeof(dp));
-
-return 0;
-
+int main(){
+    char a[]="C program";
+    printf("%d\n", my_strlen(a));
+    printf("%d\n", strlen(a));
 }

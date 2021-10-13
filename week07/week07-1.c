@@ -2,12 +2,12 @@
 #include <string.h>
 #include <stdlib.h>
 
-typedef struct{
+struct member{
     char *name;
     char *email;
     char *phone_number;
-}member;
-member m[10];
+};
+struct member m[10];
 
 int count=0;
 
@@ -40,13 +40,13 @@ int main(){
                 run=0;
                 break;
             default:
-                printf("다시 입력하세요\n");
+                printf("다시 입력하세요\n\n");
                 break;
         }
     }
 }
 
-void add_member(member *m){
+void add_member(struct member *m){
     char name_temp[20], email_temp[50], phone_number_temp[11]; 
     if(count<10){
         printf("이름 : ");
@@ -67,7 +67,7 @@ void add_member(member *m){
         printf("입력 가능한 연락처 수는 10개입니다.\n\n");
 }
 
-void search(member *m){
+void search(struct member *m){
     char name_temp[20];
     int print_count=0;
     printf("이름 : ");
@@ -82,7 +82,7 @@ void search(member *m){
         printf("해당 이름의 연락처가 존재하지 않습니다.\n\n");
 }
 
-void search_all(member *m){
+void search_all(struct member *m){
     for(int i=0; i<count; i++)
         printf("이름 : %s\n이메일 : %s\n전화번호 : %s\n\n", m[i].name, m[i].email, m[i].phone_number);
 }

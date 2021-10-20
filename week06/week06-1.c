@@ -2,12 +2,13 @@
 #include <math.h>
 
 void func_addr(void (*f));
+double cos();
 
 int main(void)
 {
-   func_addr(cos);
-   func_addr(main);
-   return 0;
+  func_addr(cos);
+  func_addr(main);
+  return 0;
 }
 
 void func_addr(void (*f))

@@ -24,7 +24,7 @@ void print_puzzle(int a[]){
         if(i%4==0) printf("\t\t\t");
         if(a[i]==0) printf("   ");
         else printf("%3d", a[i]);
-        if((i+1)%4==0) printf("\n");
+        if(i%4==3) printf("\n");
     }
 }
 
@@ -43,10 +43,8 @@ void random_puzzle(int a[]){
 
 int check_puzzle(int a[]){
     int count=0;
-    for(int i=0; i<15; i++){
-        if(a[i]==i+1)
-            count++;
-    }
+    for(int i=0; i<15; i++)
+        if(a[i]==i+1) count++;
     if(count==15) return 1;
     else return 0;
 }
@@ -57,74 +55,55 @@ int movement(int a[]){
         if(a[i]==0) break;
     ch=getch();
 
-    switch(ch){
-        case 'j':
-            if(i%4!=0){
-                a[i]=a[i-1];
-                a[i-1]=0;
-            }
-            break;
-        case 'k':
-            if(i<12){
-                a[i]=a[i+4];
-                a[i+4]=0;
-            }
-            break;
-        case 'l':
-            if(i%4!=3){
-                a[i]=a[i+1];
-                a[i+1]=0;
-            }
-            break;
-        case 'i':
-            if(i>3){
-                a[i]=a[i-4];
-                a[i-4]=0;
-            }
-            break;
-        case 'q':
-            j=1;
-            break;
+    if(ch=='j'&&i%4!=0){
+        a[i]=a[i-1];
+        a[i-1]=0;
     }
+    else if(ch=='k'&&i<12){
+        a[i]=a[i+4];
+        a[i+4]=0;
+    }
+    else if(ch=='l'&&i%4!=3){
+        a[i]=a[i+1];
+        a[i+1]=0;
+    }
+    else if(ch=='i'&&i>3){
+        a[i]=a[i-4];
+        a[i-4]=0;
+    }
+    else if(ch=='q')
+        j=1;
+    else
+        j=2;
+    
     return j;
 }
 
 int main(int argc, char *argv[]){
-    int puzzle[16]={
-         1,  2,  3,  4,
-         5,  6,  7,  8,
-         9, 10, 11, 12,
-        13, 14, 15,  0
-    };
+    int puzzle[16], count=0;
     system("clear");
     if(atoi(argv[1])==1){
-        int count=0;
-        while(1){
-            print_puzzle(puzzle);
-            if(movement(puzzle)) break;
-            if(check_puzzle(puzzle)&&count>0){
-                print_puzzle(puzzle);
-                printf("\t\t\t  축하합니다\n");
-                system("sleep 3");
-                system("clear");
-                break;
-            }
-            count++;
-        }
+        for(int i=0; i<15; i++)
+            puzzle[i]=i+1;
+        puzzle[15]=0;
     }
-    else if(atoi(argv[1])==2){
+    else if(atoi(argv[1])==2)
         random_puzzle(puzzle);
-        while(1){
+    else return 0;
+    
+    while(1){
+        print_puzzle(puzzle);
+        int x=movement(puzzle);
+        if(x==1) break;
+        else if(x==2) continue;
+        else count++;
+
+        if(check_puzzle(puzzle)&&count>0){
             print_puzzle(puzzle);
-            if(movement(puzzle)) break;
-            if(check_puzzle(puzzle)){
-                print_puzzle(puzzle);
-                printf("\t\t\t  축하합니다\n");
-                system("sleep 3");
-                system("clear");
-                break;
-            }
+            printf("\t\t\t  축하합니다\n");
+            system("sleep 3");
+            system("clear");
+            break;
         }
     }
-    else return 0;
 }

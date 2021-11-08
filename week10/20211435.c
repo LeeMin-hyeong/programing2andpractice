@@ -42,7 +42,7 @@ int movement(int a[], int b){
         a[i]=a[i-1];
         a[i-1]=0;
     }
-    else if(b=='i'&&i<12){ //up
+    else if(b=='i'&&i<12){ //down
         a[i]=a[i+4];
         a[i+4]=0;
     }
@@ -50,7 +50,7 @@ int movement(int a[], int b){
         a[i]=a[i+1];
         a[i+1]=0;
     }
-    else if(b=='k'&&i>3){ //down
+    else if(b=='k'&&i>3){ //up
         a[i]=a[i-4];
         a[i-4]=0;
     }

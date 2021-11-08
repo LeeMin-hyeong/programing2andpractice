@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <termio.h>
+#include <termios.h>
 
 int getch(void) {
     int ch;

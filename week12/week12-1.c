@@ -12,12 +12,12 @@ int main(){
     printf("입력할 직원 수 : ");
     scanf("%d", &n);
 
-    struct employee employee[n];
+    struct employee employee;
     FILE *fp=fopen("employee.bin", "wb");
 
     for(int i=0; i<n; i++){
-        scanf("%s %d %d %d", employee[i].name, &employee[i].id, &employee[i].age, &employee[i].salary);
-        fprintf(fp, "%s %d %d %d\n", employee[i].name, employee[i].id, employee[i].age, employee[i].salary);
+        scanf("%s %d %d %d", employee.name, &employee.id, &employee.age, &employee.salary);
+        fwrite(&employee, sizeof(employee), 1, fp);
     }
     fclose(fp);
 }

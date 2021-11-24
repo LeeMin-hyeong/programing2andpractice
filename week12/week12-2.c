@@ -16,7 +16,7 @@ int main(){
     rewind(fp);
 
     while(ftell(fp)!=end){
-        fscanf(fp, "%s %d %d %d\n", employee.name, &employee.id, &employee.age, &employee.salary);
+        fread(&employee, sizeof(employee), 1, fp);
         printf("%d번째 직원 : %s %d %d %d\n", i, employee.name, employee.id, employee.age, employee.salary);
         i++;
     }
